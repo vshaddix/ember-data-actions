@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { get } = Ember;
+
 export default Ember.Mixin.create({
 
   /**
@@ -21,9 +23,9 @@ export default Ember.Mixin.create({
    * @param {String} actionName - the name of the collection action to trigger
    */
   actionFor(actionName) {
-    var store = this.get('store');
-    var adapter = store.adapterFor(this);
-    var handler = this.get('actions.' + actionName);
+    var store = get(this, 'store');
+    var adapter = store.adapterFor(this.modelName);
+    var handler = get(this, `actions.${actionName}`);
     var invokeAdapterAction = (params) => {
       var adapterAction = adapter.actionFor(this.type, actionName, this);
       return adapterAction(params);

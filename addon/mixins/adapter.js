@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { get } = Ember;
+
 export default Ember.Mixin.create({
 
   /**
@@ -20,16 +22,17 @@ export default Ember.Mixin.create({
    * @param {DS.Model} snapshot - the snapshot to invoke the action against
    */
   actionFor(type, actionName, record) {
+    var handler = get(this, `actions.${actionName}`);
     var snapshot;
+
     if (record) {
       snapshot = record._createSnapshot();
     }
-    var handler = this.get('actions.' + actionName);
 
     if (handler) {
       return handler.bind(this, type, snapshot);
     } else {
-      handler = this.get('defaultAction');
+      handler = get(this, 'defaultAction');
       return handler.bind(this, type, actionName, snapshot);
     }
   },
@@ -62,7 +65,7 @@ export default Ember.Mixin.create({
    */
   defaultResourceAction(type, actionName, snapshot, params) {
     var actionURL = '/' + Ember.String.dasherize(actionName);
-    var url = this.buildURL(type.typeKey, snapshot.id, snapshot) + actionURL;
+    var url = this.buildURL(type.modelName, snapshot.id, snapshot) + actionURL;
     var method = 'POST';
     var options = { data: params };
     return this.ajax(url, method, options);
@@ -78,7 +81,7 @@ export default Ember.Mixin.create({
    */
   defaultCollectionAction(type, actionName, params) {
     var actionURL = '/' + Ember.String.dasherize(actionName);
-    var url = this.buildURL(type.typeKey) + actionURL;
+    var url = this.buildURL(type.modelName) + actionURL;
     var method = 'POST';
     var options = { data: params };
     return this.ajax(url, method, options);

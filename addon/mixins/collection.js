@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { get } = Ember;
+
 export default Ember.Mixin.create({
 
   /**
@@ -21,8 +23,8 @@ export default Ember.Mixin.create({
    * @param {String} actionName - the name of the collection action to trigger
    */
   actionFor(store, actionName) {
-    var handler = Ember.get(this, 'actions.' + actionName);
-    var adapter = store.adapterFor(this);
+    var handler =  get(this, `actions.${actionName}`);
+    var adapter = store.adapterFor(this.modelName);
     var invokeAdapterAction = (params) => {
       var adapterAction = adapter.actionFor(this, actionName);
       return adapterAction(params);
@@ -31,7 +33,7 @@ export default Ember.Mixin.create({
     if (handler) {
       return handler.bind(this, invokeAdapterAction, store);
     } else {
-      handler = Ember.get(this, 'defaultAction');
+      handler = get(this, 'defaultAction');
       return handler.bind(this, invokeAdapterAction, store, actionName);
     }
   },

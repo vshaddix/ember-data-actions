@@ -4,7 +4,7 @@ export default Ember.Mixin.create({
 
   /**
    * Trigger a collection level action.
-   * 
+   *
    * @param {String} typeKey
    * @param {String} actionName - the name of the action to trigger
    */
