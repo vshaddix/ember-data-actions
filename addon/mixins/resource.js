@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { get } from '@ember/object';
 
-const { get } = Ember;
-
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * Add your action handlers to the actions object. Handlers are functions that

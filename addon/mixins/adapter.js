@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { dasherize } from '@ember/string';
+import Mixin from '@ember/object/mixin';
+import { get } from '@ember/object';
 
-const { get } = Ember;
-
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * Add your action handlers to the actions object. Handlers are functions that
@@ -64,7 +64,7 @@ export default Ember.Mixin.create({
    * @param {Object} params - arbitrary params for this action, passed to server
    */
   defaultResourceAction(type, actionName, snapshot, params) {
-    var actionURL = '/' + Ember.String.dasherize(actionName);
+    var actionURL = '/' + dasherize(actionName);
     var url = this.buildURL(type.modelName, snapshot.id, snapshot) + actionURL;
     var method = 'POST';
     var options = { data: params };
@@ -80,7 +80,7 @@ export default Ember.Mixin.create({
    * @param {Object} params - arbitrary params for this action, passed to server
    */
   defaultCollectionAction(type, actionName, params) {
-    var actionURL = '/' + Ember.String.dasherize(actionName);
+    var actionURL = '/' + dasherize(actionName);
     var url = this.buildURL(type.modelName) + actionURL;
     var method = 'POST';
     var options = { data: params };
