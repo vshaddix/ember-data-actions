@@ -1,22 +1,43 @@
+<<<<<<< HEAD
 # ember-data-actions
+=======
+# my-addon
+>>>>>>> 1d8c765... message
 
 Introduces resource and collection actions to the Ember Data API, a la Rails. Actions are non-CRUD based endpoints in your RESTful API. Resource actions are actions performed on a single resource (i.e. "publish a book"), while collection actions are performed on the collection of resources (i.e. "a list of published books").
 
 ## Setup
 
+<<<<<<< HEAD
 To use resource or collection actions, you must include the appropriate mixins in your models and adapters.
+=======
+* `git clone <repository-url>` this repository
+* `cd my-addon`
+* `npm install`
+>>>>>>> 1d8c765... message
 
 Your adapters should apply the `ember-data-actions/mixins/adapter` mixin:
 
+<<<<<<< HEAD
 ```js
 // app/adapters/application.js
 import DS from 'ember-data';
 import AdapterActionsMixin from 'ember-data-actions/mixins/adapter';
+=======
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
+>>>>>>> 1d8c765... message
 
 export default DS.RESTAdapter.extend(AdapterActionsMixin);
 ```
 
+<<<<<<< HEAD
 Then, on any models with resource actions, use the resource mixin:
+=======
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `ember test`
+* `ember test --server`
+>>>>>>> 1d8c765... message
 
 ```js
 // app/models/book.js
@@ -26,6 +47,7 @@ import ResourceActionsMixin from 'ember-data-actions/mixins/resource';
 export default DS.Model.extend(ResourceActionsMixin);
 ```
 
+<<<<<<< HEAD
 Finally, for any collection actions, use the collection mixin applied **to the model class itself**:
 
 ```js
@@ -163,3 +185,6 @@ export default DS.RESTAdapter.extend(AdapterActionsMixin, {
   }
 });
   ```
+=======
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+>>>>>>> 1d8c765... message
